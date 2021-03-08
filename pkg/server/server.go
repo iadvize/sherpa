@@ -193,13 +193,12 @@ func (h *HTTPServer) setupTLS() error {
 		if err != nil {
 			return errors.Wrap(err, "failed to load certificate cert/key pair")
 		}
-		h.TLSConfig = &tls.Config{Certificates: []tls.Certificate{cert}}
+		h.TLSConfig = &tls.Config{Certificates: []tls.Certificate{cert}} //nolint:gosec
 	}
 	return nil
 }
 
 func (h *HTTPServer) setupStoredBackends() {
-
 	// Setup the standard backends based on the operators storage type.
 	if h.cfg.Server.ConsulStorageBackend {
 		h.logger.Debug().Msg("setting up Consul storage backend")
